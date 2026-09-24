@@ -3,18 +3,21 @@
 # linea anterior. Corregirlas es el bloque A1 de la guia del laboratorio.
 
 # defecto 1
-FROM public.ecr.aws/lambda/nodejs:latest
+FROM node:20-alpine AS builder
+WORKDIR /app
 
 # defecto 2
-COPY . .
+COPY package.json package-lock.json ./
+RUN npm ci
 
 # defecto 3
-RUN npm install
+COPY src ./src
+RUN npm run build
 
 # defecto 4
-ENV DB_PASSWORD="inf384-clave-en-texto-plano"
+
+FROM public.ecr.aws/lambda/nodejs:20 AS runtime
 
 # defecto 5
-RUN dnf install -y procps-ng vim && dnf clean all
-
-CMD ["src/handler.handler"]
+COPY --from=builder /app/dist/handler.js ${LAMBDA_TASK_ROOT}/
+CMD ["handler.handler"]
