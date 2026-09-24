@@ -6,9 +6,6 @@
 FROM node:20-alpine AS build
 WORKDIR /build
 
-#INYECCION 1 -- inyeccion
-ENV AWS_ACCESS_KEY_ID=AKIA2K7QXZM9F3RSTLPQ
-ENV AWS_SECRET_ACCESS_KEY=N3xTgQ8vLpW2yHkR6bE1cZaF9dMoIuJ4sV7lKnPq
 
 COPY package.json package-lock.json ./
 
