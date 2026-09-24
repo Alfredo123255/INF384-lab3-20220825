@@ -7,3 +7,12 @@
 #
 # Sintaxis: un patron por linea, con la misma forma que .gitignore.
 # TODO
+.git
+.github
+node_modules
+coverage
+dist
+test
+infra
+*.md
+.dockerignore
