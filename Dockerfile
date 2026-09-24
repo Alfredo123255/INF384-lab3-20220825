@@ -2,14 +2,16 @@
 # Contiene cinco malas practicas deliberadas. Cada una lleva su numero en la
 # linea anterior. Corregirlas es el bloque A1 de la guia del laboratorio.
 
-# defecto 1
+
 FROM node:20-alpine AS build
 WORKDIR /build
 
-# defecto 2
+#INYECCION 1
+ENV AWS_ACCESS_KEY_ID=AKIA2K7QXZM9F3RSTLPQ
+ENV AWS_SECRET_ACCESS_KEY=N3xTgQ8vLpW2yHkR6bE1cZaF9dMoIuJ4sV7lKnPq
+
 COPY package.json package-lock.json ./
 
-# defecto 3
 RUN npm ci
 COPY src ./src
 
